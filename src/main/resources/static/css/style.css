@@ -1,0 +1,137 @@
+body {
+    margin: 0;
+    padding: 30px;
+    font-family: Arial, sans-serif;
+    background-color: #101820;
+    color: #ffffff;
+}
+
+h1 {
+    color: #ffffff;
+    font-size: 36px;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+p {
+    color: #e6e6e6;
+}
+
+a {
+    display: inline-block;
+    margin: 6px 0;
+    padding: 10px 14px;
+    background-color: #f4c542;
+    color: #101820;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+a:hover {
+    background-color: #ffd966;
+}
+
+button {
+    margin-top: 0;
+    padding: 10px 16px;
+    background-color: #f4c542;
+    color: #101820;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #ffd966;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #182c44;
+}
+
+th {
+    background-color: #f4c542;
+    color: #101820;
+    padding: 12px;
+    text-align: left;
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid #2f4864;
+}
+
+input,
+select {
+    padding: 8px;
+    margin: 6px 0 12px 0;
+    width: 260px;
+    border-radius: 4px;
+    border: 1px solid #cccccc;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+form div {
+    margin-bottom: 8px;
+}
+
+.dashboard-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    max-width: 900px;
+    margin-top: 25px;
+}
+
+.dashboard-links a {
+    text-align: center;
+}
+
+.page-actions {
+    margin-top: 35px;
+}
+
+.page-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    max-width: 900px;
+    margin-top: 25px;
+}
+
+.stat-card {
+    background-color: #182c44;
+    border: 1px solid #f4c542;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.stat-card h3 {
+    margin: 0 0 10px 0;
+    color: #f4c542;
+    font-size: 16px;
+}
+
+.stat-card p {
+    margin: 0;
+    font-size: 28px;
+    font-weight: bold;
+    color: #ffffff;
+}

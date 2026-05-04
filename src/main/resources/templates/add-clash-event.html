@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Clash Event</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<h1>Add Clash Event</h1>
+
+<form th:action="@{/admin/clash-events/save}" th:object="${clashEvent}" method="post">
+
+    <input type="hidden" th:field="*{id}">
+
+    <div>
+        <label>Title:</label>
+        <input type="text" th:field="*{title}">
+    </div>
+
+    <div>
+        <label>Clash Date:</label>
+        <input type="date" th:field="*{clashDate}">
+    </div>
+
+    <div>
+        <label>Notes:</label>
+        <input type="text" th:field="*{notes}">
+    </div>
+
+    <div>
+        <button type="submit">Save Clash Event</button>
+    </div>
+
+</form>
+
+<div class="page-actions">
+    <a th:href="@{/admin/dashboard}">Back to Admin Dashboard</a>
+
+    <a th:href="@{/owner/dashboard}" sec:authorize="hasRole('OWNER')">
+        Back to Owner Dashboard
+    </a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Member Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<h1>Member Dashboard</h1>
+
+<p>
+    Welcome,
+    <span th:text="${memberProfile.user.fullName}"></span>
+</p>
+
+<div class="stats-grid">
+    <div class="stat-card">
+        <h3>Total Sessions</h3>
+        <p th:text="${memberProfile.totalSessions}"></p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Extra Sessions</h3>
+        <p th:text="${memberProfile.extraSessions}"></p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Used Sessions</h3>
+        <p th:text="${usedSessions}"></p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Remaining Sessions</h3>
+        <p th:text="${remainingSessions}"></p>
+    </div>
+</div>
+
+<div class="page-links">
+    <a th:href="@{/member/attendance}">My Attendance</a>
+    <a th:href="@{/member/clash-results}">My Clash Results</a>
+</div>
+
+<div class="page-actions">
+    <form th:action="@{/logout}" method="post">
+        <button type="submit">Logout</button>
+    </form>
+</div>
+
+</body>
+</html>

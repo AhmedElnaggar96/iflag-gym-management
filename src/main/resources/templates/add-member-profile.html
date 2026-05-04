@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Member Profile</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<h1>Add Member Profile</h1>
+
+<form th:action="@{/admin/member-profiles/save}" th:object="${memberProfile}" method="post">
+
+    <p th:if="${duplicateError}" th:text="${duplicateError}"></p>
+
+    <input type="hidden" th:field="*{id}">
+    <input type="hidden" th:field="*{user.id}">
+    <p th:if="${#fields.hasErrors('user')}" th:errors="*{user}"></p>
+
+    <div>
+        <label>Total Sessions:</label>
+        <input type="number" th:field="*{totalSessions}">
+        <p th:if="${#fields.hasErrors('totalSessions')}" th:errors="*{totalSessions}"></p>
+    </div>
+
+    <div>
+        <label>Extra Sessions:</label>
+        <input type="number" th:field="*{extraSessions}">
+        <p th:if="${#fields.hasErrors('extraSessions')}" th:errors="*{extraSessions}"></p>
+    </div>
+
+    <div>
+        <label>Start Date:</label>
+        <input type="date" th:field="*{startDate}">
+        <p th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}"></p>
+    </div>
+
+    <div>
+        <label>End Date:</label>
+        <input type="date" th:field="*{endDate}">
+        <p th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}"></p>
+    </div>
+
+    <div>
+        <label>Notes:</label>
+        <input type="text" th:field="*{notes}">
+    </div>
+
+    <div>
+        <button type="submit">Save Member Profile</button>
+    </div>
+</form>
+
+<div class="page-actions">
+    <a th:href="@{/admin/users}">Back to Users List</a>
+
+    <a th:href="@{/owner/dashboard}" sec:authorize="hasRole('OWNER')">
+        Back to Owner Dashboard
+    </a>
+</div>
+
+</body>
+</html>

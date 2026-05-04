@@ -1,0 +1,81 @@
+    <!DOCTYPE html>
+    <html xmlns:th="http://www.thymeleaf.org"
+          xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <meta charset="UTF-8">
+        <title>All Users</title>
+        <link rel="stylesheet" th:href="@{/css/style.css}">
+    </head>
+    <body>
+
+        <h1>All Users</h1>
+
+        <div class="page-links">
+            <a th:href="@{/admin/users/add}">Add New User</a>
+            <a th:href="@{/admin/member-profiles}">View Member Profiles</a>
+            <a th:href="@{/admin/coach-profiles}">View Coach Profiles</a>
+        </div>
+
+    <table border="1">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Role</th>
+            <th>Active</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.fullName}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.phone}"></td>
+            <td th:text="${user.role}"></td>
+            <td th:text="${user.active}"></td>
+            <td>
+                <form th:if="${user.active}" th:action="@{/admin/users/deactivate}" method="post">
+                    <input type="hidden" name="id" th:value="${user.id}">
+                    <button type="submit">Deactivate</button>
+                </form>
+
+                <form th:if="${!user.active}" th:action="@{/admin/users/activate}" method="post">
+                    <input type="hidden" name="id" th:value="${user.id}">
+                    <button type="submit">Activate</button>
+                </form>
+
+                <a th:href="@{/admin/users/reset-password(id=${user.id})}">
+                    Reset Password
+                </a>
+
+                <a th:if="${user.active and user.role.name() == 'MEMBER'}"
+                   th:href="@{/admin/member-profiles/add(userId=${user.id})}">
+                    Create Member Profile
+                </a>
+
+                <a th:if="${user.active and user.role.name() == 'COACH'}"
+                   th:href="@{/admin/coach-profiles/add(userId=${user.id})}">
+                    Create Coach Profile
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+        <div class="page-actions">
+            <a th:href="@{/admin/dashboard}">Back to Admin Dashboard</a>
+
+            <a th:href="@{/owner/dashboard}" sec:authorize="hasRole('OWNER')">
+                Back to Owner Dashboard
+            </a>
+
+            <form th:action="@{/logout}" method="post">
+                <button type="submit">Logout</button>
+            </form>
+        </div>
+</body>
+</html>

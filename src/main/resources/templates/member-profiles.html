@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>All Member Profiles</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<h1>All Member Profiles</h1>
+
+<div class="page-links">
+    <a th:href="@{/admin/users}">Back to Users</a>
+</div>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Profile ID</th>
+        <th>User ID</th>
+        <th>Full Name</th>
+        <th>Total Sessions</th>
+        <th>Extra Sessions</th>
+        <th>Used Sessions</th>
+        <th>Remaining Sessions</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Notes</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="profile : ${memberProfiles}">
+        <td th:text="${profile.id}"></td>
+        <td th:text="${profile.user.id}"></td>
+        <td th:text="${profile.user.fullName}"></td>
+        <td th:text="${profile.totalSessions}"></td>
+        <td th:text="${profile.extraSessions}"></td>
+        <td th:text="${usedSessionsMap[profile.id]}"></td>
+        <td th:text="${remainingSessionsMap[profile.id]}"></td>
+        <td th:text="${profile.startDate}"></td>
+        <td th:text="${profile.endDate}"></td>
+        <td th:text="${profile.notes}"></td>
+        <td>
+            <a th:href="@{/admin/member-profiles/edit(id=${profile.id})}">Edit</a>
+            <a th:href="@{/admin/member-attendance(memberId=${profile.id})}">View Attendance</a>
+            <a th:href="@{/admin/member-clash-results(memberId=${profile.id})}">View Clash Results</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="page-actions">
+    <a th:href="@{/admin/dashboard}">Back to Admin Dashboard</a>
+
+    <a th:href="@{/owner/dashboard}" sec:authorize="hasRole('OWNER')">
+        Back to Owner Dashboard
+    </a>
+
+    <form th:action="@{/logout}" method="post">
+        <button type="submit">Logout</button>
+    </form>
+</div>
+
+</body>
+</html>

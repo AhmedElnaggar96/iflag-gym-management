@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Coach Profile</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<h1>Add Coach Profile</h1>
+
+<form th:action="@{/admin/coach-profiles/save}" th:object="${coachProfile}" method="post">
+
+    <p th:if="${duplicateError}" th:text="${duplicateError}"></p>
+
+    <input type="hidden" th:field="*{id}">
+    <input type="hidden" th:field="*{user.id}">
+    <p th:if="${#fields.hasErrors('user')}" th:errors="*{user}"></p>
+
+    <div>
+        <label>Specialty:</label>
+        <input type="text" th:field="*{specialty}">
+        <p th:if="${#fields.hasErrors('specialty')}" th:errors="*{specialty}"></p>
+    </div>
+
+    <div>
+        <label>Notes:</label>
+        <input type="text" th:field="*{notes}">
+    </div>
+
+    <div>
+        <button type="submit">Save Coach Profile</button>
+    </div>
+</form>
+
+<div class="page-actions">
+    <a th:href="@{/admin/users}">Back to Users List</a>
+
+    <a th:href="@{/owner/dashboard}" sec:authorize="hasRole('OWNER')">
+        Back to Owner Dashboard
+    </a>
+</div>
+
+</body>
+</html>

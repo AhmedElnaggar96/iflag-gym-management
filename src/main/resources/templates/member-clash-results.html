@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Member Clash Results</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<h1 th:text="'Clash Results - ' + ${memberProfile.user.fullName}"></h1>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Clash Event</th>
+        <th>Pull Ups</th>
+        <th>Dips</th>
+        <th>Push Ups</th>
+        <th>Squats</th>
+        <th>Sit Ups</th>
+        <th>Notes</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="result : ${clashResults}">
+        <td th:text="${result.id}"></td>
+        <td th:text="${result.clashEvent.title}"></td>
+        <td th:text="${result.pullUps}"></td>
+        <td th:text="${result.dips}"></td>
+        <td th:text="${result.pushUps}"></td>
+        <td th:text="${result.squats}"></td>
+        <td th:text="${result.sitUps}"></td>
+        <td th:text="${result.notes}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="page-actions">
+    <a th:href="@{/admin/member-profiles}">Back to Member Profiles</a>
+
+    <a th:href="@{/admin/dashboard}">Back to Admin Dashboard</a>
+
+    <a th:href="@{/owner/dashboard}" sec:authorize="hasRole('OWNER')">
+        Back to Owner Dashboard
+    </a>
+
+    <form th:action="@{/logout}" method="post">
+        <button type="submit">Logout</button>
+    </form>
+</div>
+
+</body>
+</html>

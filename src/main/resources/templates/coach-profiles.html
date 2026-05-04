@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Coach Profiles</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<h1>Coach Profiles</h1>
+
+<div class="page-links">
+    <a th:href="@{/admin/users}">Back to Users</a>
+</div>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Profile ID</th>
+        <th>User ID</th>
+        <th>Full Name</th>
+        <th>Specialty</th>
+        <th>Notes</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="profile : ${coachProfiles}">
+        <td th:text="${profile.id}"></td>
+        <td th:text="${profile.user.id}"></td>
+        <td th:text="${profile.user.fullName}"></td>
+        <td th:text="${profile.specialty}"></td>
+        <td th:text="${profile.notes}"></td>
+        <td>
+            <a th:href="@{/admin/coach-profiles/edit(id=${profile.id})}">Edit</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="page-actions">
+    <a th:href="@{/admin/dashboard}">Back to Admin Dashboard</a>
+
+    <a th:href="@{/owner/dashboard}" sec:authorize="hasRole('OWNER')">
+        Back to Owner Dashboard
+    </a>
+
+    <form th:action="@{/logout}" method="post">
+        <button type="submit">Logout</button>
+    </form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Owner Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<h1>Owner Dashboard</h1>
+
+<p>Welcome to the owner dashboard.</p>
+
+<div class="stats-grid">
+    <div class="stat-card">
+        <h3>Total Users</h3>
+        <p th:text="${totalUsers}"></p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Total Member Profiles</h3>
+        <p th:text="${totalMemberProfiles}"></p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Total Coach Profiles</h3>
+        <p th:text="${totalCoachProfiles}"></p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Total Attendance Records</h3>
+        <p th:text="${totalAttendance}"></p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Total Clash Results</h3>
+        <p th:text="${totalClashResults}"></p>
+    </div>
+</div>
+
+<div class="dashboard-links">
+    <a th:href="@{/admin/users}">View All Users</a>
+    <a th:href="@{/admin/member-profiles}">View All Member Profiles</a>
+    <a th:href="@{/admin/coach-profiles}">View All Coach Profiles</a>
+    <a th:href="@{/admin/attendance}">View All Attendance</a>
+    <a th:href="@{/admin/clash-results}">View All Clash Results</a>
+</div>
+
+<div class="page-actions">
+    <form th:action="@{/logout}" method="post">
+        <button type="submit">Logout</button>
+    </form>
+</div>
+
+</body>
+</html>

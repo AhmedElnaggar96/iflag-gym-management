@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Attendance List</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<h1>All Attendance Records</h1>
+
+<div class="page-links">
+    <a th:href="@{/admin/attendance/add}">Add Attendance</a>
+</div>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Member</th>
+        <th>Coach</th>
+        <th>Session Date</th>
+        <th>Session Type</th>
+        <th>Status</th>
+        <th>Actions</th>
+        <th>Notes</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="attendance : ${attendanceList}">
+        <td th:text="${attendance.id}"></td>
+        <td th:text="${attendance.member.user.fullName}"></td>
+        <td th:text="${attendance.coach != null ? attendance.coach.user.fullName : 'No Coach'}"></td>
+        <td th:text="${attendance.sessionDate}"></td>
+        <td th:text="${attendance.sessionType}"></td>
+        <td th:text="${attendance.status}"></td>
+        <td>
+            <a th:href="@{/admin/attendance/edit(id=${attendance.id})}">Edit</a>
+            <a th:href="@{/admin/attendance/delete(id=${attendance.id})}">Delete</a>
+        </td>
+        <td th:text="${attendance.notes}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="page-actions">
+    <a th:href="@{/admin/dashboard}">Back to Admin Dashboard</a>
+
+    <a th:href="@{/owner/dashboard}" sec:authorize="hasRole('OWNER')">
+        Back to Owner Dashboard
+    </a>
+
+    <form th:action="@{/logout}" method="post">
+        <button type="submit">Logout</button>
+    </form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Clash Result</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<h1>Add Clash Result</h1>
+
+<div th:if="${duplicateError}" th:text="${duplicateError}"></div>
+
+<form th:action="@{/admin/clash-results/add}" method="get">
+    <div>
+        <label>Search Member by Name or ID:</label>
+        <input type="text" name="memberKeyword" th:value="${memberKeyword}">
+        <button type="submit">Search</button>
+        <a th:href="@{/admin/clash-results/add}">clear</a>
+    </div>
+
+</form>
+
+
+
+
+<form th:action="@{/admin/clash-results/save}" th:object="${clashResult}" method="post">
+
+    <input type="hidden" th:field="*{id}">
+
+    <div>
+        <label>Clash Event:</label>
+        <select th:field="*{clashEvent}">
+            <option value="">--Select Clash Event--</option>
+            <option th:each="event : ${clashEvents}"
+                    th:value="${event.id}"
+                    th:text="${event.title}">
+            </option>
+        </select>
+        <div th:if="${#fields.hasErrors('clashEvent')}" th:errors="*{clashEvent}"></div>
+    </div>
+
+    <div>
+        <label>Member:</label>
+        <select th:field="*{member}">
+            <option value="">--Select Member--</option>
+            <option th:each="member : ${memberProfiles}"
+                    th:value="${member.id}"
+                    th:text="${member.user.fullName}">
+            </option>
+        </select>
+        <div th:if="${#fields.hasErrors('member')}" th:errors="*{member}"></div>
+    </div>
+
+    <div>
+        <label>Pull Ups:</label>
+        <input type="number" th:field="*{pullUps}">
+        <div th:if="${#fields.hasErrors('pullUps')}" th:errors="*{pullUps}"></div>
+    </div>
+
+    <div>
+        <label>Dips:</label>
+        <input type="number" th:field="*{dips}">
+        <div th:if="${#fields.hasErrors('dips')}" th:errors="*{dips}"></div>
+    </div>
+
+    <div>
+        <label>Push Ups:</label>
+        <input type="number" th:field="*{pushUps}">
+        <div th:if="${#fields.hasErrors('pushUps')}" th:errors="*{pushUps}"></div>
+    </div>
+
+    <div>
+        <label>Squats:</label>
+        <input type="number" th:field="*{squats}">
+        <div th:if="${#fields.hasErrors('squats')}" th:errors="*{squats}"></div>
+    </div>
+
+    <div>
+        <label>Sit Ups:</label>
+        <input type="number" th:field="*{sitUps}">
+        <div th:if="${#fields.hasErrors('sitUps')}" th:errors="*{sitUps}"></div>
+    </div>
+
+    <div>
+        <label>Notes:</label>
+        <input type="text" th:field="*{notes}">
+    </div>
+
+    <div>
+        <button type="submit">Save Clash Result</button>
+    </div>
+
+</form>
+
+<div class="page-actions">
+    <a th:href="@{/admin/clash-results}">Back to Clash Results List</a>
+
+    <a th:href="@{/admin/dashboard}">Back to Admin Dashboard</a>
+
+    <a th:href="@{/owner/dashboard}" sec:authorize="hasRole('OWNER')">
+        Back to Owner Dashboard
+    </a>
+</div>
+
+</body>
+</html>

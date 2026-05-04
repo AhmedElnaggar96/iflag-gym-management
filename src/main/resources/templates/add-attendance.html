@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Attendance</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<h1>Add Attendance</h1>
+
+<!-- Search form -->
+
+<form th:action="@{/admin/attendance/add}" method="get">
+
+    <div>
+        <label>Search Member by Name or ID:</label>
+        <input type="text" name="memberKeyword" th:value="${memberKeyword}">
+        <button type="submit">Search</button>
+        <a th:href="@{/admin/attendance/add}">Clear</a>
+    </div>
+
+</form>
+
+<!-- Save attendance form -->
+<form th:action="@{/admin/attendance/save}" th:object="${attendance}" method="post">
+
+    <input type="hidden" th:field="*{id}">
+
+    <div>
+        <label>Member:</label>
+        <select th:field="*{member}">
+            <option value="">--Select Member--</option>
+            <option th:each="memberProfile : ${memberProfiles}"
+                    th:value="${memberProfile.id}"
+                    th:text="${memberProfile.user.fullName}">
+            </option>
+        </select>
+        <div th:if="${#fields.hasErrors('member')}" th:errors="*{member}"></div>
+    </div>
+
+    <div>
+        <label>Coach:</label>
+        <select th:field="*{coach}">
+            <option value="">--Select Coach--</option>
+            <option th:each="coachProfile : ${coachProfiles}"
+                    th:value="${coachProfile.id}"
+                    th:text="${coachProfile.user.fullName}">
+            </option>
+        </select>
+    </div>
+
+    <div>
+        <label>Session Date:</label>
+        <input type="date" th:field="*{sessionDate}">
+        <div th:if="${#fields.hasErrors('sessionDate')}" th:errors="*{sessionDate}"></div>
+    </div>
+
+    <div>
+        <label>Session Type:</label>
+        <select th:field="*{sessionType}">
+            <option value="">--Select Session Type--</option>
+            <option value="GROUP">GROUP</option>
+            <option value="PERSONAL">PERSONAL</option>
+        </select>
+        <div th:if="${#fields.hasErrors('sessionType')}" th:errors="*{sessionType}"></div>
+    </div>
+
+    <div>
+        <label>Status:</label>
+        <select th:field="*{status}">
+            <option value="">--Select Status--</option>
+            <option value="ATTENDED">ATTENDED</option>
+            <option value="MISSED">MISSED</option>
+            <option value="CANCELLED">CANCELLED</option>
+        </select>
+        <div th:if="${#fields.hasErrors('status')}" th:errors="*{status}"></div>
+    </div>
+
+    <div>
+        <label>Notes:</label>
+        <input type="text" th:field="*{notes}">
+    </div>
+
+    <div>
+        <button type="submit">Save Attendance</button>
+    </div>
+</form>
+
+<div class="page-actions">
+    <a th:href="@{/admin/attendance}">Back to Attendance List</a>
+
+    <a th:href="@{/admin/dashboard}">Back to Admin Dashboard</a>
+
+    <a th:href="@{/owner/dashboard}" sec:authorize="hasRole('OWNER')">
+        Back to Owner Dashboard
+    </a>
+</div>
+
+</body>
+</html>
