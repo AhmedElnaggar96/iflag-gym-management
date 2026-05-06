@@ -204,6 +204,43 @@ Planned improvements for Version 2:
 
 ---
 
+## Screenshots
+
+### Login Page
+![Login Page](screenshots/Login%20page.PNG)
+
+### Owner Dashboard
+![Owner Dashboard](screenshots/Owner%20Dashboard.PNG)
+
+### Admin Dashboard
+![Admin Dashboard](screenshots/Admin%20Dashboard.PNG)
+
+### All Users Page
+![All Users Page](screenshots/All%20Users%20page.PNG)
+
+### Add Attendance Page
+![Add Attendance Page](screenshots/Add%20Attendance%20page.PNG)
+
+### Attendance List
+![Attendance List](screenshots/Attendance%20List.PNG)
+
+### Add Clash Result Page
+![Add Clash Result Page](screenshots/Add%20Clash%20Result%20page.PNG)
+
+### Clash Results List
+![Clash Results List](screenshots/Clash%20Result%20List.PNG)
+
+### Member Dashboard
+![Member Dashboard](screenshots/Member%20Dashboard.PNG)
+
+### My Attendance
+![My Attendance](screenshots/My%20Attendance.PNG)
+
+### My Clash Results
+![My Clash Results](screenshots/My%20Clash%20Results.PNG)
+
+---
+
 ## Demo Notes
 
 Recommended demo flow:
